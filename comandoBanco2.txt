@@ -1,0 +1,35 @@
+CREATE DATABASE db_supermercado;
+
+CREATE TABLE cliente (
+ id_cliente INTEGER NOT NULL ,
+ nome CHARACTER(20) ,
+ email CHARACTER(20) ,
+ telefone CHARACTER(20) ,
+ data_registro DATE ,
+ CONSTRAINT PK_cliente PRIMARY KEY (id_cliente)
+);
+
+CREATE TABLE produto (
+ id_produto INTEGER NOT NULL ,
+ nome CHARACTER(20) ,
+ categoria CHARACTER(20) ,
+ estoque INTEGER ,
+ preco NUMERIC(6,2) ,
+ CONSTRAINT PK_produto PRIMARY KEY (id_produto)
+);
+
+CREATE TABLE compras (
+ id_compra INTEGER NOT NULL ,
+ id_cliente INTEGER ,
+ id_produto INTEGER ,
+ quantidade INTEGER ,
+ data_compra DATE ,
+ status CHARACTER(20) ,
+ total NUMERIC(6,2) ,
+ CONSTRAINT PK_compras PRIMARY KEY (id_compra) ,
+);
+
+ALTER TABLE compras ADD CONSTRAINT cliente_compra
+ FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente);
+ALTER TABLE compras ADD CONSTRAINT produto_compra
+ FOREIGN KEY (id_produto) REFERENCES produto (id_produto);
